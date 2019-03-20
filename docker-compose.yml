@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  graphql:
+    image: node:11
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm start"
+    ports:
+      - 4000:4000
+  db:
+    image: postgres
+    ports:
+      - 5431:5432
+  pgadmin_workshop:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports:
+      - 5433:80
