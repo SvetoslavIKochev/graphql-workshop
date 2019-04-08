@@ -1,6 +1,5 @@
-import { Sequelize } from "sequelize-typescript";
-// import { initProduct } from "./product";
-// import { initManufacturer } from "./manufacturer";
+import { Sequelize } from "sequelize";
+import { initUser } from "./user.model";
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config")[env];
@@ -10,8 +9,8 @@ const sequelize = new Sequelize(
   url,
   {
     ...config,
-    modelPaths: [__dirname + '/*.model.ts'],
-    modelMatch: (filename: any, member: any) => {
+    modelPaths: [__dirname + '/*.model.js'],
+    modelMatch: (filename, member) => {
       return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
     },
   }
@@ -20,11 +19,12 @@ const sequelize = new Sequelize(
 const db = {
   sequelize,
   Sequelize,
+  User: initUser(sequelize)
   // Manufacturer: initManufacturer(sequelize),
   // Product: initProduct(sequelize),
 };
 
-Object.values(db).forEach((model: any) => {
+Object.values(db).forEach((model) => {
   if (model.associate) {
     model.associate(db);
   }
