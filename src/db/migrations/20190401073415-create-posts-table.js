@@ -9,7 +9,7 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    return queryInterface.createTable('Posts', {
+    return queryInterface.createTable('posts', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -31,13 +31,13 @@ module.exports = {
       author_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'users',
           key: 'id',
           deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
         }
       },
-      createdAt: Sequelize.DATE,
-      updatedAt: Sequelize.DATE
+      created_at: Sequelize.DATE,
+      updated_at: Sequelize.DATE
     })
   },
 
@@ -49,6 +49,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('Posts');
+    return queryInterface.dropTable('posts');
   }
 };

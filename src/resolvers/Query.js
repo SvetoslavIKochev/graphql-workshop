@@ -1,3 +1,5 @@
+import User from "../db/models/user.model";
+
 const Query = {
   users(parent, args, { db, db_new }, info) {
     if (!args.query) {
@@ -11,8 +13,11 @@ const Query = {
     //   return user.name.toLowerCase().includes(args.query.toLowerCase())
     // })
   },
-  posts(parent, args, { db }, info) {
+  posts(parent, args, { db, db_new }, info) {
     if (!args.query) {
+      db_new.Post.findAll().then(posts => {
+        console.log(posts)
+      })
       return db.posts
     }
 
@@ -24,7 +29,10 @@ const Query = {
       return isTitleMatch || isBodyMatch
     })
   },
-  comments(parent, args, { db }, info) {
+  comments(parent, args, { db, db_new }, info) {
+    db_new.Comment.findAll().then(comments => {
+      console.log(comments)
+    })
     return db.comments
   },
   me() {

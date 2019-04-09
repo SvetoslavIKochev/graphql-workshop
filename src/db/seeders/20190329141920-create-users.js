@@ -12,7 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Users', [{
+    return queryInterface.bulkInsert('users', [{
       id: 1,
       name: 'John Oliver',
       email: 'gosho_slqpoto@accedia.com',
@@ -38,6 +38,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('users', null, {});
   }
 };

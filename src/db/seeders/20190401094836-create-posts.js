@@ -12,7 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Posts',
+    return queryInterface.bulkInsert('posts',
       [{
         id: 1,
         title: 'Pesho otide na pochivka',
@@ -45,6 +45,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Posts', null, {});
+    return queryInterface.bulkDelete('posts', null, {});
   }
 };

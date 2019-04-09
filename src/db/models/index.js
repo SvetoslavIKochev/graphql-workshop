@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
-import { initUser } from "./user.model";
+import User, { initUser } from "./user.model";
+import Post, { initPost } from "./post.model";
+import Comment, { initComment } from "./comment.model";
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config")[env];
@@ -16,12 +18,16 @@ const sequelize = new Sequelize(
   }
 );
 
+initUser(sequelize);
+initPost(sequelize);
+initComment(sequelize);
+
 const db = {
   sequelize,
   Sequelize,
-  User: initUser(sequelize)
-  // Manufacturer: initManufacturer(sequelize),
-  // Product: initProduct(sequelize),
+  User: User,
+  Post: Post,
+  Comment: Comment
 };
 
 Object.values(db).forEach((model) => {

@@ -12,7 +12,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Comments',
+    return queryInterface.bulkInsert('comments',
       [
         {
           id: 1,
@@ -49,6 +49,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    return queryInterface.bulkDelete('Comments', null, {});
+    return queryInterface.bulkDelete('comments', null, {});
   }
 };

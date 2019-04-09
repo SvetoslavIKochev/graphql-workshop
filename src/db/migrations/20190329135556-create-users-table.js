@@ -9,7 +9,7 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('users', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -25,8 +25,8 @@ module.exports = {
         unique: true
       },
       age: Sequelize.INTEGER,
-      createdAt: Sequelize.DATE,
-      updatedAt: Sequelize.DATE
+      created_at: Sequelize.DATE,
+      updated_at: Sequelize.DATE
     })
   },
 
@@ -38,6 +38,6 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-    return queryInterface.dropTable('Users')
+    return queryInterface.dropTable('users')
   }
 };

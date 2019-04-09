@@ -1,7 +1,8 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize, Model } from 'sequelize';
+export default class User extends Model {}
 
 export function initUser(sequelize) {
-  return sequelize.define('User', {
+  User.init({
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -19,5 +20,5 @@ export function initUser(sequelize) {
     age: Sequelize.INTEGER,
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
-  })
+  }, { sequelize, timestamps: true, underscored: true });
 }
