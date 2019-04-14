@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  graphql:
+    image: node:11
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: npm start
+    environment:
+#      - DB_NAME=workshop
+#      - DB_USER=graphql
+#      - DB_PASSWORD=graphql
+#      - DB_HOST=db
+      - DATABSE_CONNECTION_URI=postgresql://graphql:graphql@db/workshop
+#      - DB_PORT=5432
+      - NODE_ENV=development
+    links:
+      - db:db
+    depends_on:
+      - db
+    ports:
+      - 4000:4000
+  db:
+    image: postgres
+    env_file: db/psql.env
+    ports:
+      - 5432:5432
+  pgadmin_workshop:
+    image: dpage/pgadmin4
+    logging:
+      driver: none
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root
+      - PGADMIN_DEFAULT_PASSWORD=password
+    ports:
+      - 5433:80
