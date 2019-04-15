@@ -1,13 +1,9 @@
 const Post = {
-  author(parent, args, { db }, info) {
-    return db.users.find((user) => {
-      return user.id === parent.author
-    })
+  async author(parent, args, { db_new }, info) {
+    return await db_new.User.findByPk(parent.authorId)
   },
-  comments(parent, args, { db }, info) {
-    return db.comments.filter((comment) => {
-      return comment.post === parent.id
-    })
+  async comments(parent, args, { db_new }, info) {
+    return await db_new.Comment.findByPostId(parent.id)
   }
 };
 

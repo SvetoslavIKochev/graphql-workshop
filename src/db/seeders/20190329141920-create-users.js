@@ -13,17 +13,14 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('users', [{
-      id: 1,
       name: 'John Oliver',
       email: 'gosho_slqpoto@accedia.com',
       age: 33
     }, {
-      id: 2,
       name: 'Pesho Qkiq',
       email: 'pesho_proteina@accedia.com',
       age: 25
     }, {
-      id: 3,
       name: 'Gosho Dulgiq',
       email: 'neshto@accedia.com',
       age: 21

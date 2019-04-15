@@ -1,5 +1,16 @@
 import { Sequelize, Model } from 'sequelize';
-export default class User extends Model {}
+
+export default class User extends Model {
+  static existsById(id) {
+    return User.count({
+      where: {
+        id
+      }
+    }).then(count => {
+      return count !== 0;
+    });
+  }
+}
 
 export function initUser(sequelize) {
   User.init({
