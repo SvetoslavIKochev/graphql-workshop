@@ -1,9 +1,8 @@
 import uuidv4 from "uuid/v4";
 
-
-
 const Mutation = {
   createUser(parent, args, { db }, info) {
+    //TODO: Change to DB
     const emailTaken = db.users.some((user) => user.email === args.data.email);
 
     if (emailTaken) {
@@ -20,6 +19,7 @@ const Mutation = {
     return user
   },
   deleteUser(parent, args, { db }, info) {
+    //TODO: Change to DB
     const userIndex = db.users.findIndex(user => user.id === args.id);
 
     if (userIndex === -1) {
@@ -43,6 +43,7 @@ const Mutation = {
     return deletedUsers[0]
   },
   updateUser(parent, args, { db }, info) {
+    //TODO: Change to DB
     const { id, data } = args;
 
     const user = db.users.find(user => user.id === id);
@@ -71,32 +72,36 @@ const Mutation = {
 
     return user
   },
-  createPost(parent, args, { db, pubsub }, info) {
-    const userExists = db.users.some((user) => user.id === args.data.author);
+  async createPost(parent, args, { db_new, pubsub }, info) {
+    const userExists = await db_new.User.existsById(args.data.author);
 
     if (!userExists) {
       throw new Error('User not found');
     }
 
     const post = {
-      id: uuidv4(),
-      ...args.data
+      title: args.data.title,
+      body: args.data.body,
+      published: args.data.published,
+      authorId: args.data.author
     };
 
-    db.posts.push(post);
+    return await db_new.Post.create(post).then(post => {
+      if (post.published) {
+        pubsub.publish('post', {
+          post: {
+            mutation: 'CREATED',
+            data: post
+          }
+        });
+      }
 
-    if (post.published) {
-      pubsub.publish('post', {
-        post: {
-          mutation: 'CREATED',
-          data: post
-        }
-      });
-    }
-
-    return post;
+      console.log(post);
+      return post;
+    });
   },
   deletePost(parent, args, { db, pubsub }, info) {
+    //TODO: Change to DB
     const postIndex = db.posts.findIndex(post => post.id === args.id);
 
     if (postIndex === -1) {
@@ -119,6 +124,7 @@ const Mutation = {
     return post
   },
   updatePost(parent, args, { db, pubsub }, info) {
+    //TODO: Change to DB
     const { id, data } = args;
     const post = db.posts.find(post => post.id === id);
     const originalPost = { ...post }
@@ -165,6 +171,7 @@ const Mutation = {
     return post
   },
   createComment(parent, args, { db, pubsub }, info) {
+    //TODO: Change to DB
     const authorExists = db.users.some(user => user.id === args.data.author);
     const postExists = db.posts.some(post => post.id === args.data.post && post.published);
 
@@ -193,6 +200,7 @@ const Mutation = {
     return comment
   },
   deleteComment(parent, args, { db, pubsub }, info) {
+    //TODO: Change to DB
     const commentIndex = db.comments.findIndex(comment => comment.id === args.id);
 
     if (commentIndex === -1) {
@@ -211,6 +219,7 @@ const Mutation = {
     return comment
   },
   updateComment(parent, args, { db, pubsub }, info) {
+    //TODO: Change to DB
     const { id, data } = args;
     const comment = db.comments.find(comment => comment.id === id);
 

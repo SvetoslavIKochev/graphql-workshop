@@ -1,7 +1,26 @@
-import { Sequelize, Model } from "sequelize";
+import { Sequelize, Model, Op } from "sequelize";
 import User from "./user.model";
 
-export default class Post extends Model {}
+export default class Post extends Model {
+  static findByTitleOrBody(query) {
+    return Post.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.iLike]: `%${ query.toLowerCase() }%`
+            }
+          },
+          {
+            body: {
+              [Op.iLike]: `%${ query.toLowerCase() }%`
+            }
+          }
+        ]
+      }
+    })
+  }
+}
 
 export function initPost(sequelize) {
   Post.init({

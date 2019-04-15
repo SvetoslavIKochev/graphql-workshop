@@ -1,39 +1,26 @@
-import User from "../db/models/user.model";
-
 const Query = {
   users(parent, args, { db, db_new }, info) {
+    //TODO: Retrieve users from DB
     if (!args.query) {
       db_new.User.findAll().then(users => {
         console.log(users)
       });
       return db.users
     }
-    //
-    // return db.users.filter((user) => {
-    //   return user.name.toLowerCase().includes(args.query.toLowerCase())
-    // })
+
+    return db.users.filter((user) => {
+      return user.name.toLowerCase().includes(args.query.toLowerCase())
+    })
   },
-  posts(parent, args, { db, db_new }, info) {
+  async posts(parent, args, { db_new }, info) {
     if (!args.query) {
-      db_new.Post.findAll().then(posts => {
-        console.log(posts)
-      })
-      return db.posts
+      return await db_new.Post.findAll()
     }
 
-    return db.posts.filter((post) => {
-
-      const isTitleMatch = post.title.toLowerCase().includes(args.query.toLowerCase());
-      const isBodyMatch = post.body.toLowerCase().includes(args.query.toLowerCase());
-
-      return isTitleMatch || isBodyMatch
-    })
+    return await db_new.Post.findByTitleOrBody(args.query)
   },
-  comments(parent, args, { db, db_new }, info) {
-    db_new.Comment.findAll().then(comments => {
-      console.log(comments)
-    })
-    return db.comments
+  async comments(parent, args, { db_new }, info) {
+    return await db_new.Comment.findAll()
   },
   me() {
     return {

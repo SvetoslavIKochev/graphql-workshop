@@ -15,25 +15,21 @@ module.exports = {
     return queryInterface.bulkInsert('comments',
       [
         {
-          id: 1,
           text: 'Great post',
           author_id: 3,
           post_id: 2
         },
         {
-          id: 2,
           text: 'Mnogo tupo',
           author_id: 3,
           post_id: 2
         },
         {
-          id: 3,
           text: 'Brao mashina',
           author_id: 3,
           post_id: 3
         },
         {
-          id: 4,
           text: 'This is great article',
           author_id: 1,
           post_id: 3

@@ -14,21 +14,18 @@ module.exports = {
     */
     return queryInterface.bulkInsert('posts',
       [{
-        id: 1,
         title: 'Pesho otide na pochivka',
         body: 'neznaino kude',
         published: true,
         author_id: 1
       },
       {
-        id: 2,
         title: 'Testing titles bulshit',
         body: 'Bulshits are everywhere',
         published: true,
         author_id: 1
       },
       {
-        id: 3,
         title: 'Accedia flames everyone',
         body: 'Pesho frame everyone up against each other',
         published: false,

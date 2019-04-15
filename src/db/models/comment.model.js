@@ -2,7 +2,15 @@ import { Sequelize, Model } from "sequelize";
 import User from "./user.model";
 import Post from "./post.model";
 
-export default class Comment extends Model {}
+export default class Comment extends Model {
+  static findByPostId(postId) {
+    return Comment.findAll({
+      where: {
+        postId
+      }
+    })
+  }
+}
 
 export function initComment(sequelize) {
   Comment.init({
@@ -24,5 +32,5 @@ export function initComment(sequelize) {
   });
 
   Comment.belongsTo(User, { foreignKey: 'authorId' });
-  Comment.belongsTo(Post);
+  Comment.belongsTo(Post, { foreignKey: 'postId' });
 }
