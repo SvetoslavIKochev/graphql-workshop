@@ -1,79 +1,64 @@
-const users = [
-  {
+const users = [{
     id: '1',
-    name: 'Stefaka',
-    email: 'stefaka@accedia.com',
-    age: 21
-  },
-  {
+    name: 'Andrew',
+    email: 'andrew@example.com',
+    age: 27
+}, {
     id: '2',
-    name: 'Gosho',
-    email: 'gosho@accedia.com',
-    age: 30
-  },
-  {
+    name: 'Sarah',
+    email: 'sarah@example.com'
+}, {
     id: '3',
-    name: 'Pesho',
-    email: 'pesho@accedia.com',
-    age: 24
-  }
-];
+    name: 'Mike',
+    email: 'mike@example.com'
+}]
 
-const posts = [
-  {
+const posts = [{
+    id: '10',
+    title: 'GraphQL 101',
+    body: 'This is how to use GraphQL...',
+    published: true,
+    author: '1'
+}, {
     id: '11',
-    title: 'Pesho otide na pochivka',
-    body: 'neznaino kude',
-    published: true,
-    author: '1'
-  },
-  {
-    id: '12',
-    title: 'Testing titles bulshit',
-    body: 'Bulshits are everywhere',
-    published: true,
-    author: '1'
-  },
-  {
-    id: '13',
-    title: 'Accedia flames everyone',
-    body: 'Pesho frame everyone up against each other',
+    title: 'GraphQL 201',
+    body: 'This is an advanced GraphQL post...',
     published: false,
+    author: '1'
+}, {
+    id: '12',
+    title: 'Programming Music',
+    body: '',
+    published: true,
     author: '2'
-  }
-];
+}]
 
-const comments = [
-  {
-    id: '21',
-    text: 'Great post',
+const comments = [{
+    id: '102',
+    text: 'This worked well for me. Thanks!',
     author: '3',
-    post: '12'
-  },
-  {
-    id: '22',
-    text: 'Mnogo tupo',
-    author: '3',
-    post: '12'
-  },
-  {
-    id: '23',
-    text: 'Brao mashina',
-    author: '2',
-    post: '13'
-  },
-  {
-    id: '24',
-    text: 'This is great article',
+    post: '10'
+}, {
+    id: '103',
+    text: 'Glad you enjoyed it.',
     author: '1',
-    post: '13'
-  }
-];
+    post: '10'
+}, {
+    id: '104',
+    text: 'This did no work.',
+    author: '2',
+    post: '11'
+}, {
+    id: '105',
+    text: 'Nevermind. I got it to work.',
+    author: '1',
+    post: '12'
+}]
 
 const db = {
-  users,
-  posts,
-  comments
-};
+    users,
+    posts,
+    comments
+}
 
-export default db;
+export default db

@@ -1,35 +1,42 @@
 const Query = {
-  users(parent, args, { db, db_new }, info) {
-    //TODO: Retrieve users from DB
-    if (!args.query) {
-      db_new.User.findAll().then(users => {
-        console.log(users)
-      });
-      return db.users
-    }
+    users(parent, args, { db }, info) {
+        if (!args.query) {
+            return db.users
+        }
 
-    return db.users.filter((user) => {
-      return user.name.toLowerCase().includes(args.query.toLowerCase())
-    })
-  },
-  async posts(parent, args, { db_new }, info) {
-    if (!args.query) {
-      return await db_new.Post.findAll()
-    }
+        return db.users.filter((user) => {
+            return user.name.toLowerCase().includes(args.query.toLowerCase())
+        })
+    },
+    posts(parent, args, { db }, info) {
+        if (!args.query) {
+            return db.posts
+        }
 
-    return await db_new.Post.findByTitleOrBody(args.query)
-  },
-  async comments(parent, args, { db_new }, info) {
-    return await db_new.Comment.findAll()
-  },
-  me() {
-    return {
-      id: '123093',
-      name: 'Mike',
-      email: 'mike@example.com',
-      age: 28
+        return db.posts.filter((post) => {
+            const isTitleMatch = post.title.toLowerCase().includes(args.query.toLowerCase())
+            const isBodyMatch = post.body.toLowerCase().includes(args.query.toLowerCase())
+            return isTitleMatch || isBodyMatch
+        })
+    },
+    comments(parent, args, { db }, info) {
+        return db.comments
+    },
+    me() {
+        return {
+            id: '123098',
+            name: 'Mike',
+            email: 'mike@example.com'
+        }
+    },
+    post() {
+        return {
+            id: '092',
+            title: 'GraphQL 101',
+            body: '',
+            published: false
+        }
     }
-  }
-};
+}
 
-export { Query as default }
+export default Query
