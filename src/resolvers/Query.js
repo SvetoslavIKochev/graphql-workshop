@@ -1,3 +1,8 @@
+// TODO: 4. Change the resolver to filter posts if title or body includes query
+// If no query is available - return all posts
+// If query is available - check if title or body contains the query
+// Hint: Use Arrays.filter method - for example db.posts.filter(...)
+
 const Query = {
     users(parent, args, { db }, info) {
         if (!args.query) {
@@ -8,20 +13,7 @@ const Query = {
             return user.name.toLowerCase().includes(args.query.toLowerCase())
         })
     },
-    posts(parent, args, { db }, info) {
-        if (!args.query) {
-            return db.posts
-        }
-
-        return db.posts.filter((post) => {
-            const isTitleMatch = post.title.toLowerCase().includes(args.query.toLowerCase())
-            const isBodyMatch = post.body.toLowerCase().includes(args.query.toLowerCase())
-            return isTitleMatch || isBodyMatch
-        })
-    },
-    comments(parent, args, { db }, info) {
-        return db.comments
-    },
+    // TODO: 2. Define posts resolver and return all posts from `db.posts`
     me() {
         return {
             id: '123098',
@@ -37,6 +29,6 @@ const Query = {
             published: false
         }
     }
-}
+};
 
 export default Query
