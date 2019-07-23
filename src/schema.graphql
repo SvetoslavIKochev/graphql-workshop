@@ -1,16 +1,10 @@
-# TODO: 2. Add query named "post" and return non nullable Post type
-
-type Query {
-    me: User!
-}
-
-type User {
-    id: ID!
-    name: String!
-    email: String!
-    age: Int
-}
-
-# TODO: 1. Create Post type here
-# Define fields: id, title, body and published - non nullable
-# id of type ID, title and body of type sting, published of type boolean
+#type Query {
+#    me: User!
+#}
+#
+#type User {
+#    id: ID!
+#    name: String!
+#    email: String!
+#    age: Int
+#}
