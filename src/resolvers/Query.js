@@ -14,13 +14,10 @@ const Query = {
         }
 
         return db.posts.filter((post) => {
-            const isTitleMatch = post.title.toLowerCase().includes(args.query.toLowerCase())
-            const isBodyMatch = post.body.toLowerCase().includes(args.query.toLowerCase())
+            const isTitleMatch = post.title.toLowerCase().includes(args.query.toLowerCase());
+            const isBodyMatch = post.body.toLowerCase().includes(args.query.toLowerCase());
             return isTitleMatch || isBodyMatch
         })
-    },
-    comments(parent, args, { db }, info) {
-        return db.comments
     },
     me() {
         return {
@@ -37,6 +34,6 @@ const Query = {
             published: false
         }
     }
-}
+};
 
 export default Query
