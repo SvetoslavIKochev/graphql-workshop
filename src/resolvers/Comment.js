@@ -1,14 +1,8 @@
-const Comment = {
-    author(parent, args, { db }, info) {
-        return db.users.find((user) => {
-            return user.id === parent.author
-        })
-    },
-    post(parent, args, { db }, info) {
-        return db.posts.find((post) => {
-            return post.id === parent.post
-        })
-    }
-}
+// TODO: 5. Create resolver for "author" field that will return the user that has this author id
+//  Example for Post author
+
+// TODO: 9. Create resolver for "post" field that will return the post of the comment
+
+const Comment = { };
 
 export default Comment
