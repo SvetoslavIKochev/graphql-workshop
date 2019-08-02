@@ -1,3 +1,5 @@
+// TODO: 3. Add the post subscription resolver. It will just register new subject with tag 'post'
+
 const Subscription = {
     comment: {
         subscribe(parent, { postId }, { db, pubsub }, info){
@@ -8,11 +10,6 @@ const Subscription = {
             }
 
             return pubsub.asyncIterator(`comment ${postId}`)
-        }
-    },
-    post: {
-        subscribe(parent, args, { pubsub }, info) {
-            return pubsub.asyncIterator('post')
         }
     }
 }

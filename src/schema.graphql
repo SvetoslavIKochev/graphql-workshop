@@ -1,3 +1,5 @@
+# TODO: 1. Create new "PostSubscriptionPayload" that will return the MutationType and the data as Post type
+
 type Query {
     users(query: String): [User!]!
     posts(query: String): [Post!]!
@@ -20,7 +22,7 @@ type Mutation {
 
 type Subscription {
     comment(postId: ID!): CommentSubscriptionPayload!
-    post: PostSubscriptionPayload!
+    # TODO: 2. Add the post subscription that will return the newer created type
 }
 
 input CreateUserInput {
@@ -87,11 +89,6 @@ enum MutationType {
     CREATED
     UPDATED
     DELETED
-}
-
-type PostSubscriptionPayload {
-    mutation: MutationType!
-    data: Post!
 }
 
 type CommentSubscriptionPayload {
