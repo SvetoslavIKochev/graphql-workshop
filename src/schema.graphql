@@ -1,3 +1,6 @@
+# TODO: 1. Define "CreateCommentInput" that will include the text of the comment
+#  and author and post of type ID. The inputs should be non-nullable
+
 type Query {
     users(query: String): [User!]!
     posts(query: String): [Post!]!
@@ -11,16 +14,7 @@ type Mutation {
     deleteUser(id: ID!): User!
     updateUser(id: ID!, data: UpdateUserInput!): User!
     createPost(data: CreatePostInput!): Post!
-    deletePost(id: ID!): Post!
-    updatePost(id: ID!, data: UpdatePostInput!): Post!
-    createComment(data: CreateCommentInput!): Comment!
-    deleteComment(id: ID!): Comment!
-    updateComment(id: ID!, data: UpdateCommentInput!): Comment!
-}
-
-type Subscription {
-    comment(postId: ID!): CommentSubscriptionPayload!
-    post: PostSubscriptionPayload!
+    # TODO: 2. Define "createComment" mutation and will accept data of type CreateCommentInput and will return Comment
 }
 
 input CreateUserInput {
@@ -40,22 +34,6 @@ input CreatePostInput {
     body: String!
     published: Boolean!
     author: ID!
-}
-
-input UpdatePostInput {
-    title: String
-    body: String
-    published: Boolean
-}
-
-input CreateCommentInput {
-    text: String!
-    author: ID!
-    post: ID!
-}
-
-input UpdateCommentInput {
-    text: String
 }
 
 type User {
@@ -81,20 +59,4 @@ type Comment {
     text: String!
     author: User!
     post: Post!
-}
-
-enum MutationType {
-    CREATED
-    UPDATED
-    DELETED
-}
-
-type PostSubscriptionPayload {
-    mutation: MutationType!
-    data: Post!
-}
-
-type CommentSubscriptionPayload {
-    mutation: MutationType!
-    data: Comment!
 }
