@@ -1,22 +1,20 @@
 type Query {
-    users(query: String): [User!]!
-    posts(query: String): [Post!]!
-    me: User!
-    post: Post!
+  users(query: String): [User!]!
+  posts(query: String): [Post!]!
+  me: User!
+  post: Post!
 }
 
 type User {
-    id: ID!
-    name: String!
-    email: String!
-    age: Int
-#    posts: [Post!]!
+  id: ID!
+  name: String!
+  email: String!
+  age: Int
 }
 
 type Post {
-    id: ID!
-    title: String!
-    body: String!
-    published: Boolean!
-#    author: User!
+  id: ID!
+  title: String!
+  body: String!
+  published: Boolean!
 }
