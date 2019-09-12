@@ -1,5 +1,5 @@
 # TODO: 1. Define "CreateCommentInput" that will include the text of the comment
-#  and author and post of type ID. The inputs should be non-nullable
+#  and authorId and postId of type ID. The inputs should be non-nullable
 
 type Query {
     users(query: String): [User!]!
@@ -33,7 +33,7 @@ input CreatePostInput {
     title: String!
     body: String!
     published: Boolean!
-    author: ID!
+    authorId: ID!
 }
 
 type User {

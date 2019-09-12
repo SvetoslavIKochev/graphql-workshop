@@ -27,7 +27,7 @@ const Mutation = {
         const deletedUsers = db.users.splice(userIndex, 1)
 
         db.posts = db.posts.filter((post) => {
-            const match = post.author === args.id
+            const match = post.authorId === args.id
 
             if (match) {
                 db.comments = db.comments.filter((comment) => comment.post !== post.id)
@@ -35,7 +35,7 @@ const Mutation = {
 
             return !match
         })
-        db.comments = db.comments.filter((comment) => comment.author !== args.id)
+        db.comments = db.comments.filter((comment) => comment.authorId !== args.id)
 
         return deletedUsers[0]
     },
@@ -68,7 +68,7 @@ const Mutation = {
         return user
     },
     createPost(parent, args, { db, pubsub }, info) {
-        const userExists = db.users.some((user) => user.id === args.data.author)
+        const userExists = db.users.some((user) => user.id === args.data.authorId)
 
         if (!userExists) {
             throw new Error('User not found')
