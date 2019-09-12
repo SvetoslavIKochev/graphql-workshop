@@ -30,13 +30,13 @@ input CreatePostInput {
   title: String!
   body: String!
   published: Boolean!
-  author: ID!
+  authorId: ID!
 }
 
 input CreateCommentInput {
   text: String!
-  author: ID!
-  post: ID!
+  authorId: ID!
+  postId: ID!
 }
 
 type User {
