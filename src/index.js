@@ -1,10 +1,10 @@
 import { GraphQLServer, PubSub } from 'graphql-yoga'
 import db from './db'
-import Query from './resolvers/Query'
-import Mutation from './resolvers/Mutation'
-import User from './resolvers/User'
-import Post from './resolvers/Post'
-import Comment from './resolvers/Comment'
+import Query from './resolvers/query'
+import Mutation from './resolvers/mutation'
+import User from './resolvers/user'
+import Post from './resolvers/post'
+import Comment from './resolvers/comment'
 
 const pubsub = new PubSub()
 
