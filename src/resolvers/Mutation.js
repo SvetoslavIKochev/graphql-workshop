@@ -27,15 +27,15 @@ const Mutation = {
         const deletedUsers = db.users.splice(userIndex, 1)
 
         db.posts = db.posts.filter((post) => {
-            const match = post.author === args.id
+            const match = post.authorId === args.id
 
             if (match) {
-                db.comments = db.comments.filter((comment) => comment.post !== post.id)
+                db.comments = db.comments.filter((comment) => comment.postId !== post.id)
             }
 
             return !match
         })
-        db.comments = db.comments.filter((comment) => comment.author !== args.id)
+        db.comments = db.comments.filter((comment) => comment.authorId !== args.id)
 
         return deletedUsers[0]
     },
@@ -68,7 +68,7 @@ const Mutation = {
         return user
     },
     createPost(parent, args, { db, pubsub }, info) {
-        const userExists = db.users.some((user) => user.id === args.data.author)
+        const userExists = db.users.some((user) => user.id === args.data.authorId)
 
         if (!userExists) {
             throw new Error('User not found')
@@ -101,7 +101,7 @@ const Mutation = {
 
         const [post] = db.posts.splice(postIndex, 1)
 
-        db.comments = db.comments.filter((comment) => comment.post !== args.id)
+        db.comments = db.comments.filter((comment) => comment.postId !== args.id)
 
         if (post.published) {
             pubsub.publish('post', {
@@ -161,8 +161,8 @@ const Mutation = {
         return post
     },
     createComment(parent, args, { db, pubsub }, info) {
-        const userExists = db.users.some((user) => user.id === args.data.author)
-        const postExists = db.posts.some((post) => post.id === args.data.post && post.published)
+        const userExists = db.users.some((user) => user.id === args.data.authorId)
+        const postExists = db.posts.some((post) => post.id === args.data.postId && post.published)
 
         if (!userExists || !postExists) {
             throw new Error('Unable to find user and post')
@@ -174,7 +174,7 @@ const Mutation = {
         }
 
         db.comments.push(comment)
-        pubsub.publish(`comment ${args.data.post}`, {
+        pubsub.publish(`comment ${args.data.postId}`, {
             comment: {
                 mutation: 'CREATED',
                 data: comment
@@ -191,7 +191,7 @@ const Mutation = {
         }
 
         const [deletedComment] = db.comments.splice(commentIndex, 1)
-        pubsub.publish(`comment ${deletedComment.post}`, {
+        pubsub.publish(`comment ${deletedComment.postId}`, {
             comment: {
                 mutation: 'DELETED',
                 data: deletedComment
@@ -212,7 +212,7 @@ const Mutation = {
             comment.text = data.text
         }
 
-        pubsub.publish(`comment ${comment.post}`, {
+        pubsub.publish(`comment ${comment.postId}`, {
             comment: {
                 mutation: 'UPDATED',
                 data: comment

@@ -39,7 +39,7 @@ input CreatePostInput {
     title: String!
     body: String!
     published: Boolean!
-    author: ID!
+    authorId: ID!
 }
 
 input UpdatePostInput {
@@ -50,8 +50,8 @@ input UpdatePostInput {
 
 input CreateCommentInput {
     text: String!
-    author: ID!
-    post: ID!
+    authorId: ID!
+    postId: ID!
 }
 
 input UpdateCommentInput {
