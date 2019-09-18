@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4'
 
 const Mutation = {
-    createUser(parent, args, { db }, info) {
+    createUser(parent, args, { db, pubsub }, info) {
         const emailTaken = db.users.some((user) => user.email === args.data.email)
 
         if (emailTaken) {
@@ -14,6 +14,7 @@ const Mutation = {
         }
 
         db.users.push(user)
+        pubsub.publish('CREATED_USER', { user })
 
         return user
     },
@@ -67,7 +68,7 @@ const Mutation = {
 
         return user
     },
-    // TODO: 4. When we create a post and it is published, use `pubsub.publish` to send the new data to the subscribers.
+    // TODO: 3. When we create a post and it is published, use `pubsub.publish` to send the new data to the subscribers.
     createPost(parent, args, { db, pubsub }, info) {
         const userExists = db.users.some((user) => user.id === args.data.authorId)
 
@@ -81,15 +82,6 @@ const Mutation = {
         }
 
         db.posts.push(post)
-
-        if (args.data.published) {
-            pubsub.publish('post', { 
-                post: {
-                    mutation: 'CREATED',
-                    data: post
-                }
-             })
-        }
 
         return post
     },
@@ -107,12 +99,6 @@ const Mutation = {
         }
 
         db.comments.push(comment)
-        pubsub.publish(`comment ${args.data.postId}`, {
-            comment: {
-                mutation: 'CREATED',
-                data: comment
-            }
-        })
 
         return comment
     }
