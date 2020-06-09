@@ -11,10 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.14.3",
+    "apollo-server-lambda": "^2.14.3",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "braces": "^3.0.2",
+    "graphql-playground-html": "^1.6.25",
     "graphql-yoga": "^1.14.10",
+    "minimist": "^1.2.5",
+    "set-value": "^3.0.2",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
