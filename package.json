@@ -18,7 +18,7 @@
     "braces": "^3.0.2",
     "graphql-playground-html": "^1.6.25",
     "graphql-yoga": "^1.14.10",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "set-value": "^3.0.2",
     "uuid": "^8.1.0"
   },
